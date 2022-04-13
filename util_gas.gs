@@ -57,12 +57,12 @@ function COMBINE_COLS(range1, range2) {
 }
 
 /**
- * @public Combines the values of 2 columns in a single. 
+ * Combines the values of 2 columns in a single. 
  * 
- * @param range1 Range of cells. (string range | list items)
- * @param range2 Range of cells. (string range | list items)
- * @param randon_number Random number for update function. (ref https://stackoverflow.com/questions/17341399/refresh-data-retrieved-by-a-custom-function-in-google-sheet)
- * 
+ * @param {string|Array<string>}range1 Range of cells.
+ * @param {string} range2 Range of cells.
+ * @param {number} randon_number Random number for update function automatically. (ref https://stackoverflow.com/questions/17341399/refresh-data-retrieved-by-a-custom-function-in-google-sheet)
+ * @return List of combined elements.
  * @customfunction
  */
 function COMBINE_COLS_EX(range1, range2, randon_number=33) {
