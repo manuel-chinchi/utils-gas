@@ -102,7 +102,7 @@ function COMBINE_COLS_EX(range1, range2, randon_number=33) {
   return array_combinated;
 }
 
-//#region New Functions
+//#region New Functions ------------------------------------------------------------------
 /**
  * Combines the elements of two lists into a single list
  * 
@@ -114,7 +114,7 @@ function COMBINE_COLS_EX(range1, range2, randon_number=33) {
  * 
  * @customfunction
  */
- function ARRAY_COMBINE(range1, range2, separator = '', ignoreEmpties = true) {
+function ARRAY_COMBINE(range1, range2, separator = '', ignoreEmpties = true) {
   var list1 = Array.isArray(range1) ? range1.join().split(',') : null;
   var list2 = Array.isArray(range2) ? range2.join().split(',') : null;
   var list3 = [];
@@ -134,27 +134,26 @@ function COMBINE_COLS_EX(range1, range2, randon_number=33) {
 }
 
 /**
- * Realiza la permutacion con los elementos de dos listas.
+ * Performs the permutation of the elements of a list
  * 
  * @param {Array<string>} range Range of cells at permutate.
- * @param {string} separator Separator.
- * @param {boolean} withRepetitions Flag indicating whether permutations with repetition are to be considered.
- * @return List of values.
+ * @param {string} separator Separator for each group of swapped values.
+ * @return List of permutations as strings.
  * 
  * @customfunction
  */
-function ARRAY_PERMUTATIONS(range, separator='', withRepetitions=false) {
+function ARRAY_PERMUTATOR(range, separator='') {
   var list = Array.isArray(range) ? range.join().split(',').filter(Boolean) : null;
   var permutations = PERMUTATOR(list);
   return JOIN_ITEMS(permutations, separator);
 }
 
 /**
- * Convierte cada uno de los elementos (listas) del conjunto a una cadena.
+ * Concatenates each of the subgroups of elements in a list to a string, using a specified separator.
  * 
- * @param {Array} cells Rango de celdas.
- * @param {string} separator Separador.
- * @return Lista de elementos
+ * @param {Array} cells Range of cells.
+ * @param {string} separator Separator.
+ * @return List of strings.
  * 
  * @customfunction
  */
@@ -169,10 +168,10 @@ function JOIN_ITEMS(cells, separator=' ') {
 }
 
 /**
- * Crea una lista que contiene las permutaciones por grupo.
+ * Creates an array containing each group of permutations of a list of elements.
  * 
- * @param {string} range Rango de valores.
- * @return {Array<Array>} Lista de listas.
+ * @param {string} range Range of cells at permutate.
+ * @return {Array<Array>} Matrix of arrays.
  * 
  * @customfunction
  */
