@@ -42,9 +42,10 @@ function ARRAY_PERMUTATION(range, separator='') {
 }
 
 /**
- * Concatenates each of the subgroups of elements in a list to a string, using a specified separator.
- * @param {Array} cells Range of cells.
- * @param {string} separator Separator.
+ * Converts each of the subgroups of an array to a string. Optionally you can specify a 
+ * separator to appear between the union of the elements of each subgroup.
+ * @param {Array} cells Range of values.
+ * @param {string} separator Separator for each final string value in the array.
  * @returns {Array<string>} List of strings.
  * @customfunction
  */
@@ -52,7 +53,8 @@ function JOIN_ITEMS(cells, separator=' ') {
   var list = [];
 
   for (let i = 0; i < cells.length; i++) {
-    list.push(cells[i].join(',').replaceAll(',', separator));
+    // list.push(cells[i].join(',').replaceAll(',', separator)); // old
+    list.push(Array(cells[i]).join(',').replace(/,/g, separator));
   };
 
   return list;
