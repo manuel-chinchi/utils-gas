@@ -87,3 +87,95 @@ function PERMUTATOR(range) {
 
   return permute(range); 
 }
+
+//#region Clases -------------------------------------------------------------------------
+const UTC_ZONES = [
+  'UTC-11',
+  'UTC-10',
+  'UTC-9',
+  'UTC-8',
+  'UTC-7',
+  'UTC-6',
+  'UTC-5',
+  'UTC-4',
+  'UTC-3',
+  'UTC-2:30',
+  'UTC-2',
+  'UTC-1',
+  'UTC+0',
+  'UTC+1',
+  'UTC+2',
+  'UTC+3',
+  'UTC+4',
+  'UTC+4:30',
+  'UTC+5',
+  'UTC+5:30',
+  'UTC+5:45',
+  'UTC+6',
+  'UTC+6:30',
+  'UTC+7',
+  'UTC+8',
+  'UTC+9',
+  'UTC+9:30',
+  'UTC+10',
+  'UTC+11',
+  'UTC+12',
+  'UTC+13'
+]
+
+class Clock {
+  /**
+   * This object represent the global time according to the configuration with UTC+0.
+   * @param {string} utc String indicating the coordinated universal time (UTC) of a specific area.
+   */
+  constructor(utc='UTC+0') {
+    this.utc = utc.toUpperCase();
+    this.time = null;
+  }
+
+  get UTC() {
+    return this.utc;
+  }
+
+  set UTC(UTC) {
+    this.utc = UTC.toUpperCase();
+  }
+
+  /**
+   * Calculate the current time according to the UCT indicated, by default it takes UTC+0.
+   * @param utc String indicating the coordinated universal time (UTC) of a specific area.
+   * @returns Time in text format
+   */
+  getTime(utc=this.UTC) {
+    utc = utc.toUpperCase();
+    var date = new Date();
+
+    if ( UTC_ZONES.indexOf(utc) > -1 ) { // check valid UTC string
+      var hoursAndMinutes = utc.split(/\+|\-/g)[1].split(':');
+      
+      if (hoursAndMinutes.length == 1) { // only hours
+        var hours = parseInt(hoursAndMinutes);
+        
+        if (utc.indexOf('-') >- 1) { // substraction
+          hours = (-1)*hours;
+        }
+        
+        date.setUTCHours(hours);
+      } else { // hours and minutes
+        var hours = parseInt(hoursAndMinutes[0]);
+        var minutes = parseInt(hoursAndMinutes[1]);
+        
+        if (utc.indexOf('-') > -1) {
+          hours = (-1)*hours;
+          minutes = (-1)*minutes;
+        }
+
+        date.setUTCHours(hours);
+        date.setUTCMinutes(minutes);
+      }
+    }
+    
+    return `${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`;
+  }
+}
+//#endregion
