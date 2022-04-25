@@ -1,4 +1,4 @@
-//#region Clases -------------------------------------------------------------------------
+//#region Constants ----------------------------------------------------------------------
 const UTC_ZONES = [
   'UTC-11',
   'UTC-10',
@@ -32,7 +32,9 @@ const UTC_ZONES = [
   'UTC+12',
   'UTC+13'
 ]
+//#endregion
 
+//#region Clases -------------------------------------------------------------------------
 class Clock {
   /**
    * This object represent the global time according to the configuration with UTC+0.
@@ -86,9 +88,20 @@ class Clock {
     }
     
     return `${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`;
+    // return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
   }
 }
 //#endregion
+
+/**
+ * Calculate the current time according to the UCT indicated, by default it takes UTC+0.
+ * @param utc String indicating the coordinated universal time (UTC) of a specific area.
+ * @returns Time in text format.
+ * @customfunction
+ */
+// function CLOCK_TIME(utc) {
+//   return (new Clock(utc)).getTime();
+// }
 
 /**
  * Combines the elements of two lists 1:1.
@@ -179,3 +192,51 @@ function PERMUTATOR(range) {
 
   return permute(range); 
 }
+
+// FUNCIONA pero no me gusta el orden de salida
+function ARRAY_SUB_SETS(range, separator='') {
+  var list = Array.isArray(range) ? range.join().split(',') : null;
+  
+  var result=[];
+  function fork(i,t) {
+    if (i === list.length) {
+      result.push(t);
+      return;
+    }
+    fork(i+1, t.concat([list[i]]));
+    fork(i+1,t);
+  }
+  fork(0, []);
+  return ORDER_SUB_SETS(result, result.length);
+}
+
+function ORDER_SUB_SETS(list, maxSizeGroups) {
+  list.pop();
+  var orderList = [];
+  var i = 1;
+  var j = 0;
+
+  while (i <= maxSizeGroups) {
+    while (j < list.length) {
+      if (list[j].length == i) { // size sub set
+        orderList.push(list[j]);
+      }
+      j++;
+    }
+    i++; j=0;
+  }
+
+  return orderList;
+}
+
+var arr = [1, 2, 3];
+console.log(ARRAY_SUB_SETS(arr));
+// [
+//   [ '1' ],
+//   [ '2' ],
+//   [ '3' ],
+//   [ '1', '2' ],
+//   [ '1', '3' ],
+//   [ '2', '3' ],
+//   [ '1', '2', '3' ]
+// ]
